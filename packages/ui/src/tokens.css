@@ -1,0 +1,315 @@
+/* ============================================================
+   DESIGN SYSTEM — "Te lo imprimo"
+   Minimal Editorial · Studio de Objetos · Premium
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   FUENTES
+   ---------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap');
+
+/* ----------------------------------------------------------
+   TOKENS DE COLOR — MODO CLARO (default)
+   ---------------------------------------------------------- */
+:root {
+  /* Fondos */
+  --color-bg-base:        #FFFFFF;
+  --color-bg-base-rgb:    255, 255, 255;
+  --color-bg-subtle:      #F5F4F2;
+  --color-bg-muted:       #EDECE9;
+  --color-bg-elevated:    #FAFAF9;
+
+  /* Superficies / Tarjetas */
+  --color-surface-1:      #FFFFFF;
+  --color-surface-2:      #F5F4F2;
+  --color-surface-3:      #EDECE9;
+
+  /* Bordes */
+  --color-border-subtle:  #E8E6E3;
+  --color-border-default: #D4D1CC;
+  --color-border-strong:  #B0ADA7;
+
+  /* Texto */
+  --color-text-primary:   #0F0E0C;
+  --color-text-secondary: #4A4845;
+  --color-text-tertiary:  #8A8784;
+  --color-text-disabled:  #C4C2BE;
+  --color-text-inverse:   #FFFFFF;
+
+  /* Acento rojo-naranja */
+  --color-accent:         #E8420A;
+  --color-accent-hover:   #D13508;
+  --color-accent-light:   #FDF0EB;
+  --color-accent-muted:   #F4C9B8;
+
+  /* Highlight / Cursor amarillo suave */
+  --color-highlight:      #F5E642;
+  --color-highlight-bg:   #FDFBE8;
+  --color-highlight-muted:#F9F59A;
+
+  /* Estados */
+  --color-success:        #2CB67D;
+  --color-warning:        #F5A623;
+  --color-error:          --color-accent;
+
+  /* Overlay */
+  --color-overlay:        rgba(15, 14, 12, 0.40);
+  --color-overlay-light:  rgba(15, 14, 12, 0.06);
+
+  /* ----------------------------------------------------------
+     TIPOGRAFÍA
+     ---------------------------------------------------------- */
+  --font-sans:       'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:    'DM Serif Display', Georgia, serif;
+  --font-mono:       'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  /* Escala tipográfica modular (base 16px, ratio 1.25) */
+  --text-xs:   0.64rem;   /* 10.24px */
+  --text-sm:   0.8rem;    /* 12.80px */
+  --text-base: 1rem;      /* 16px    */
+  --text-md:   1.25rem;   /* 20px    */
+  --text-lg:   1.563rem;  /* 25px    */
+  --text-xl:   1.953rem;  /* 31px    */
+  --text-2xl:  2.441rem;  /* 39px    */
+  --text-3xl:  3.052rem;  /* 49px    */
+  --text-4xl:  3.815rem;  /* 61px    */
+  --text-5xl:  4.768rem;  /* 76px    */
+
+  /* Line-heights */
+  --leading-tight:   1.15;
+  --leading-snug:    1.30;
+  --leading-normal:  1.50;
+  --leading-relaxed: 1.70;
+  --leading-loose:   2.00;
+
+  /* Letter-spacing */
+  --tracking-tighter: -0.04em;
+  --tracking-tight:   -0.02em;
+  --tracking-normal:   0em;
+  --tracking-wide:     0.04em;
+  --tracking-wider:    0.08em;
+  --tracking-widest:   0.16em;
+
+  /* Font weights */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-black:    900;
+
+  /* ----------------------------------------------------------
+     SPACING SYSTEM (base 4px × 2)
+     ---------------------------------------------------------- */
+  --space-0:   0px;
+  --space-px:  1px;
+  --space-0-5: 0.125rem;  /* 2px  */
+  --space-1:   0.25rem;   /* 4px  */
+  --space-1-5: 0.375rem;  /* 6px  */
+  --space-2:   0.5rem;    /* 8px  */
+  --space-3:   0.75rem;   /* 12px */
+  --space-4:   1rem;      /* 16px */
+  --space-5:   1.25rem;   /* 20px */
+  --space-6:   1.5rem;    /* 24px */
+  --space-8:   2rem;      /* 32px */
+  --space-10:  2.5rem;    /* 40px */
+  --space-12:  3rem;      /* 48px */
+  --space-16:  4rem;      /* 64px */
+  --space-20:  5rem;      /* 80px */
+  --space-24:  6rem;      /* 96px */
+  --space-32:  8rem;      /* 128px */
+  --space-40:  10rem;     /* 160px */
+  --space-48:  12rem;     /* 192px */
+  --space-64:  16rem;     /* 256px */
+
+  /* ----------------------------------------------------------
+     BORDER RADIUS
+     ---------------------------------------------------------- */
+  --radius-none:  0px;
+  --radius-sm:    0.125rem;   /* 2px  */
+  --radius-base:  0.25rem;    /* 4px  */
+  --radius-md:    0.5rem;     /* 8px  */
+  --radius-lg:    0.75rem;    /* 12px */
+  --radius-xl:    1rem;       /* 16px */
+  --radius-2xl:   1.5rem;     /* 24px */
+  --radius-full:  9999px;
+
+  /* ----------------------------------------------------------
+     SOMBRAS PREMIUM — sutiles y en capas
+     ---------------------------------------------------------- */
+  --shadow-xs:
+    0 1px 2px rgba(15, 14, 12, 0.04),
+    0 1px 1px rgba(15, 14, 12, 0.02);
+
+  --shadow-sm:
+    0 1px 3px rgba(15, 14, 12, 0.06),
+    0 2px 6px rgba(15, 14, 12, 0.04),
+    0 1px 1px rgba(15, 14, 12, 0.02);
+
+  --shadow-md:
+    0 4px 8px rgba(15, 14, 12, 0.06),
+    0 8px 24px rgba(15, 14, 12, 0.06),
+    0 1px 2px rgba(15, 14, 12, 0.04);
+
+  --shadow-lg:
+    0 8px 16px rgba(15, 14, 12, 0.06),
+    0 16px 40px rgba(15, 14, 12, 0.08),
+    0 2px 4px rgba(15, 14, 12, 0.04);
+
+  --shadow-xl:
+    0 16px 32px rgba(15, 14, 12, 0.08),
+    0 32px 64px rgba(15, 14, 12, 0.10),
+    0 4px 8px rgba(15, 14, 12, 0.04);
+
+  --shadow-2xl:
+    0 24px 48px rgba(15, 14, 12, 0.10),
+    0 48px 96px rgba(15, 14, 12, 0.12),
+    0 6px 12px rgba(15, 14, 12, 0.06);
+
+  /* Sombras de acento */
+  --shadow-accent-sm:
+    0 2px 8px rgba(232, 66, 10, 0.20),
+    0 1px 2px rgba(232, 66, 10, 0.12);
+
+  --shadow-accent-md:
+    0 4px 16px rgba(232, 66, 10, 0.24),
+    0 8px 32px rgba(232, 66, 10, 0.14);
+
+  /* Sombra inset (pressed) */
+  --shadow-inset:
+    inset 0 2px 4px rgba(15, 14, 12, 0.08),
+    inset 0 1px 2px rgba(15, 14, 12, 0.04);
+
+  /* ----------------------------------------------------------
+     TRANSICIONES & EASING
+     ---------------------------------------------------------- */
+  --duration-instant:  50ms;
+  --duration-fast:     100ms;
+  --duration-base:     200ms;
+  --duration-slow:     300ms;
+  --duration-slower:   500ms;
+  --duration-slowest:  800ms;
+
+  --ease-linear:   linear;
+  --ease-in:       cubic-bezier(0.4, 0, 1, 1);
+  --ease-out:      cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-premium:  cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* ----------------------------------------------------------
+     Z-INDEX SCALE
+     ---------------------------------------------------------- */
+  --z-base:     0;
+  --z-raised:   10;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-overlay:  300;
+  --z-modal:    400;
+  --z-toast:    500;
+
+  /* ----------------------------------------------------------
+     LAYOUT
+     ---------------------------------------------------------- */
+  --container-sm:   640px;
+  --container-md:   768px;
+  --container-lg:   1024px;
+  --container-xl:   1280px;
+  --container-2xl:  1440px;
+
+  --gutter-sm:  var(--space-4);
+  --gutter-md:  var(--space-8);
+  --gutter-lg:  var(--space-16);
+}
+
+/* ----------------------------------------------------------
+   TOKENS DE COLOR — DARK MODE
+   Inversión cromática completa manteniendo jerarquía
+   ---------------------------------------------------------- */
+[data-theme="dark"] {
+  /* Fondos */
+  --color-bg-base:        #0C0B09;
+  --color-bg-base-rgb:    12, 11, 9;
+  --color-bg-subtle:      #141310;
+  --color-bg-muted:       #1C1A17;
+  --color-bg-elevated:    #111009;
+
+  /* Superficies / Tarjetas */
+  --color-surface-1:      #1A1815;
+  --color-surface-2:      #232018;
+  --color-surface-3:      #2B2820;
+
+  /* Bordes */
+  --color-border-subtle:  #252218;
+  --color-border-default: #333028;
+  --color-border-strong:  #4A4640;
+
+  /* Texto */
+  --color-text-primary:   #F2F0EC;
+  --color-text-secondary: #B5B2AC;
+  --color-text-tertiary:  #7A7773;
+  --color-text-disabled:  #3D3B37;
+  --color-text-inverse:   #0C0B09;
+
+  /* Acento rojo-naranja — más intenso en dark */
+  --color-accent:         #FF5722;
+  --color-accent-hover:   #FF6D42;
+  --color-accent-light:   #1F0E07;
+  --color-accent-muted:   #4A1E10;
+
+  /* Highlight amarillo suave — ajustado para dark */
+  --color-highlight:      #E8D800;
+  --color-highlight-bg:   #1A1800;
+  --color-highlight-muted:#2E2B00;
+
+  /* Estados */
+  --color-success:        #34D399;
+  --color-warning:        #FBC353;
+  --color-error:          #FF5722;
+
+  /* Overlay */
+  --color-overlay:        rgba(0, 0, 0, 0.65);
+  --color-overlay-light:  rgba(255, 255, 255, 0.04);
+
+  /* Sombras dark — más difusas, fondo ya oscuro */
+  --shadow-xs:
+    0 1px 2px rgba(0, 0, 0, 0.30),
+    0 1px 1px rgba(0, 0, 0, 0.20);
+
+  --shadow-sm:
+    0 1px 3px rgba(0, 0, 0, 0.40),
+    0 2px 6px rgba(0, 0, 0, 0.30),
+    0 1px 1px rgba(0, 0, 0, 0.20);
+
+  --shadow-md:
+    0 4px 8px rgba(0, 0, 0, 0.40),
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.25);
+
+  --shadow-lg:
+    0 8px 16px rgba(0, 0, 0, 0.45),
+    0 16px 40px rgba(0, 0, 0, 0.40),
+    0 2px 4px rgba(0, 0, 0, 0.30);
+
+  --shadow-xl:
+    0 16px 32px rgba(0, 0, 0, 0.50),
+    0 32px 64px rgba(0, 0, 0, 0.45),
+    0 4px 8px rgba(0, 0, 0, 0.35);
+
+  --shadow-2xl:
+    0 24px 48px rgba(0, 0, 0, 0.55),
+    0 48px 96px rgba(0, 0, 0, 0.50),
+    0 6px 12px rgba(0, 0, 0, 0.40);
+
+  --shadow-accent-sm:
+    0 2px 8px rgba(255, 87, 34, 0.30),
+    0 1px 2px rgba(255, 87, 34, 0.20);
+
+  --shadow-accent-md:
+    0 4px 16px rgba(255, 87, 34, 0.35),
+    0 8px 32px rgba(255, 87, 34, 0.25);
+
+  --shadow-inset:
+    inset 0 2px 4px rgba(0, 0, 0, 0.30),
+    inset 0 1px 2px rgba(0, 0, 0, 0.20);
+}

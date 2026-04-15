@@ -1,0 +1,14 @@
+{
+  "name": "@repo/lib",
+  "version": "1.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "typescript": "^5.3.3",
+    "eslint": "^8.56.0"
+  }
+}
