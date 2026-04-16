@@ -2,7 +2,7 @@
 
 import { ThemeToggle } from "@repo/ui/theme-toggle";
 import { MagneticButton } from "@repo/ui/magnetic-button";
-import { RevealOnScroll, StaggerChildren, HoverScale } from "@repo/ui/animations";
+import { RevealOnScroll, HoverScale } from "@repo/ui/animations";
 import { Header } from "@repo/ui/header";
 
 /* ── Swatch helper ──────────────────────────────────────── */

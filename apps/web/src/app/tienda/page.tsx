@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Header, HoverScale, useCart, Footer } from "@repo/ui";
+import { Header, useCart, Footer } from "@repo/ui";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -68,13 +68,9 @@ const CATEGORIES = ["Todos", "Decoración", "Iluminación", "Oficina"];
 export default function StorePage() {
   const [activeCategory, setActiveCategory] = useState("Todos");
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false);
   const { addItem } = useCart();
-
   const selectedProduct = PRODUCTS.find(p => p.id === selectedId);
-
   useEffect(() => {
-    setMounted(true);
     if (selectedId) {
       document.body.style.overflow = "hidden";
     } else {

@@ -3,12 +3,12 @@
 import { Header, MagneticButton } from "@repo/ui";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "@/lib/emailjs-config";
 
-export default function GraciasPage() {
+function GraciasContent() {
   const searchParams = useSearchParams();
   const [mounted, setMounted] = useState(false);
   const emailSent = useRef(false);
@@ -95,50 +95,61 @@ export default function GraciasPage() {
   if (!mounted) return null;
 
   return (
+    <main style={{ flex: 1, display: "grid", placeItems: "center", padding: "var(--space-8)", marginTop: "100px" }}>
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+        style={{ textAlign: "center", maxWidth: "600px", padding: "var(--space-12)", background: "var(--color-surface-1)", borderRadius: "var(--radius-3xl)", border: "1px solid var(--color-border-subtle)", boxShadow: "var(--shadow-xl)" }}
+      >
+        <motion.div 
+          initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+          style={{ width: "80px", height: "80px", background: status === 'pending' ? 'var(--color-text-secondary)' : "var(--color-accent)", color: "var(--color-text-inverse)", borderRadius: "50%", display: "grid", placeItems: "center", margin: "0 auto var(--space-8)" }}
+        >
+          {status === 'pending' ? (
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          ) : (
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          )}
+        </motion.div>
+        
+        <h1 style={{ fontFamily: "var(--font-display)", fontSize: "var(--text-4xl)", marginBottom: "var(--space-4)" }}>
+          {status === 'pending' ? 'Pago Pendiente' : '¡Gracias por tu compra!'}
+        </h1>
+        
+        <p style={{ color: "var(--color-text-secondary)", fontSize: "var(--text-md)", lineHeight: "var(--leading-relaxed)", marginBottom: "var(--space-8)", maxWidth: "45ch", marginInline: "auto" }}>
+          {status === 'pending' 
+            ? 'Estamos esperando la confirmación de tu pago. Te notificaremos por correo electrónico en cuanto se procese el pedido.'
+            : 'Hemos recibido tu orden correctamente. Comenzaremos el proceso de impresión 3D a la brevedad y te enviaremos actualizaciones a tu correo electrónico.'}
+        </p>
+        
+        {isDemo && (
+          <div style={{ background: "color-mix(in srgb, var(--color-accent) 15%, transparent)", color: "var(--color-accent)", padding: "var(--space-3)", borderRadius: "var(--radius-md)", fontSize: "var(--text-sm)", marginBottom: "var(--space-8)" }}>
+            <b>Modo Demo:</b> Simulación de pago de MercadoPago completada sin tokens reales.
+          </div>
+        )}
+
+        <div style={{ display: "flex", justifyContent: "center", gap: "var(--space-4)", flexWrap: "wrap" }}>
+          <Link href="/tienda" style={{ textDecoration: "none" }}>
+            <MagneticButton variant="primary">Continuar Comprando</MagneticButton>
+          </Link>
+        </div>
+      </motion.div>
+    </main>
+  );
+}
+
+export default function GraciasPage() {
+  return (
     <div style={{ minHeight: "100dvh", background: "var(--color-bg-base)", color: "var(--color-text-primary)", display: "flex", flexDirection: "column" }}>
       <Header />
-      
-      <main style={{ flex: 1, display: "grid", placeItems: "center", padding: "var(--space-8)", marginTop: "100px" }}>
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-          style={{ textAlign: "center", maxWidth: "600px", padding: "var(--space-12)", background: "var(--color-surface-1)", borderRadius: "var(--radius-3xl)", border: "1px solid var(--color-border-subtle)", boxShadow: "var(--shadow-xl)" }}
-        >
-          <motion.div 
-            initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            style={{ width: "80px", height: "80px", background: status === 'pending' ? 'var(--color-text-secondary)' : "var(--color-accent)", color: "var(--color-text-inverse)", borderRadius: "50%", display: "grid", placeItems: "center", margin: "0 auto var(--space-8)" }}
-          >
-            {status === 'pending' ? (
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            ) : (
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            )}
-          </motion.div>
-          
-          <h1 style={{ fontFamily: "var(--font-display)", fontSize: "var(--text-4xl)", marginBottom: "var(--space-4)" }}>
-            {status === 'pending' ? 'Pago Pendiente' : '¡Gracias por tu compra!'}
-          </h1>
-          
-          <p style={{ color: "var(--color-text-secondary)", fontSize: "var(--text-md)", lineHeight: "var(--leading-relaxed)", marginBottom: "var(--space-8)", maxWidth: "45ch", marginInline: "auto" }}>
-            {status === 'pending' 
-              ? 'Estamos esperando la confirmación de tu pago. Te notificaremos por correo electrónico en cuanto se procese el pedido.'
-              : 'Hemos recibido tu orden correctamente. Comenzaremos el proceso de impresión 3D a la brevedad y te enviaremos actualizaciones a tu correo electrónico.'}
-          </p>
-          
-          {isDemo && (
-            <div style={{ background: "color-mix(in srgb, var(--color-accent) 15%, transparent)", color: "var(--color-accent)", padding: "var(--space-3)", borderRadius: "var(--radius-md)", fontSize: "var(--text-sm)", marginBottom: "var(--space-8)" }}>
-              <b>Modo Demo:</b> Simulación de pago de MercadoPago completada sin tokens reales.
-            </div>
-          )}
-
-          <div style={{ display: "flex", justifyContent: "center", gap: "var(--space-4)", flexWrap: "wrap" }}>
-            <Link href="/tienda" style={{ textDecoration: "none" }}>
-              <MagneticButton variant="primary">Continuar Comprando</MagneticButton>
-            </Link>
-          </div>
-        </motion.div>
-      </main>
+      <Suspense fallback={
+        <div style={{ flex: 1, display: "grid", placeItems: "center" }}>
+          <p style={{ fontFamily: "var(--font-sans)", color: "var(--color-text-secondary)" }}>Cargando confirmación...</p>
+        </div>
+      }>
+        <GraciasContent />
+      </Suspense>
     </div>
   );
 }

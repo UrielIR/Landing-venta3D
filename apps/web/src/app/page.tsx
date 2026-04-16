@@ -5,11 +5,8 @@ import {
   MagneticButton,
   RevealOnScroll,
   StaggerChildren,
-  TextReveal,
-  HoverScale,
   Footer
 } from "@repo/ui";
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 const MOCK_PRODUCTS = [

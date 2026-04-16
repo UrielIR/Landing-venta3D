@@ -1,10 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Header, RevealOnScroll, useCart, MagneticButton } from "@repo/ui";
-import { motion, AnimatePresence } from "framer-motion";
+import { Header, RevealOnScroll, useCart } from "@repo/ui";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function CheckoutPage() {
   const { items, subtotal, shipping, total, clearCart } = useCart();

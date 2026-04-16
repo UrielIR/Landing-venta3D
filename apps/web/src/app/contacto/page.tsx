@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Header, MagneticButton, Footer } from "@repo/ui";
-import { motion, AnimatePresence } from "framer-motion";
+import { Header, Footer } from "@repo/ui";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "@/lib/emailjs-config";
 
@@ -78,13 +77,14 @@ export default function ContactoPage() {
       } catch (err) { console.error(err); }
     }
     try {
+      const weight = Math.round(Math.pow(Math.max(height, 5), 1.8) * 0.8); // Estimación técnica de peso
       const templateParams = {
         from_name: formData.nombre,
         from_email: formData.email,
         message: formData.mensaje,
         file_link: imageUrl,
         file_name: file ? file.name : "N/A",
-        calculator_data: fileType === "3d" ? `Material: ${material}, Res: ${resolution}, Peso: ${weight}g, Est: ${calculateEstimate()}` : "N/A",
+        calculator_data: fileType === "3d" ? `Material: ${material}, Res: ${resolution}, Peso: ~${weight}g, Est: ${calculateEstimate()}` : "N/A",
       };
       await emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID_CONTACT, templateParams, EMAILJS_CONFIG.PUBLIC_KEY);
       setSent(true);

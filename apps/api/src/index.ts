@@ -31,7 +31,9 @@ app.post('/create-order', async (req, res) => {
     }
 
     // 1. Inserción Pasiva en Supabase (Se ignora error intencionalmente en mock si las llaves no existen)
-    if (!supabase.supabaseUrl.includes('YOUR_SUPABASE')) {
+    const isSupabaseConfigured = process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_URL !== "";
+    
+    if (isSupabaseConfigured) {
       const { error: dbError } = await supabase
         .from('clientes')
         .upsert({
