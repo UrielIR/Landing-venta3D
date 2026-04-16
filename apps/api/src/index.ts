@@ -5,9 +5,11 @@ import { supabase } from './supabase';
 
 const app = express();
 const port = process.env.PORT || 3001;
+const allowedOrigin = process.env.CORS_ORIGIN || 'http://localhost:3000';
+const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
 
 // CORS y JSON middleware
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: allowedOrigin }));
 app.use(express.json());
 
 // Placeholder (Mock DB)
@@ -31,7 +33,7 @@ app.post('/create-order', async (req, res) => {
     }
 
     // 1. Inserción Pasiva en Supabase (Se ignora error intencionalmente en mock si las llaves no existen)
-    const isSupabaseConfigured = process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_URL !== "";
+    const isSupabaseConfigured = process.env.SUPABASE_URL && process.env.SUPABASE_URL !== "";
     
     if (isSupabaseConfigured) {
       const { error: dbError } = await supabase
@@ -110,9 +112,9 @@ app.post('/create-preference', async (req, res) => {
         items: mpItems,
         external_reference: orderId, // Para rastrear post-pago
         back_urls: {
-          success: 'http://localhost:3000/gracias',
-          failure: 'http://localhost:3000/checkout?error=failure',
-          pending: 'http://localhost:3000/gracias?status=pending',
+          success: `${baseUrl}/gracias`,
+          failure: `${baseUrl}/checkout?error=failure`,
+          pending: `${baseUrl}/gracias?status=pending`,
         },
         auto_return: 'approved',
       }
@@ -126,7 +128,7 @@ app.post('/create-preference', async (req, res) => {
     // Para entornos dev donde YOUR_ACCESS_TOKEN es invalido y fallará al consultar la API, 
     // hacemos fallback visual para no romper el flujo de la demo.
     return res.status(200).json({ 
-      init_point: 'http://localhost:3000/gracias?demo=true',
+      init_point: `${baseUrl}/gracias?demo=true`,
       mocked: true,
       errorMsg: 'AccessToken invalido (demo run)'
     });
@@ -134,5 +136,5 @@ app.post('/create-preference', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`API running on http://localhost:${port}`);
+  console.log(`API running on port ${port}`);
 });

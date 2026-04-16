@@ -21,6 +21,8 @@ export default function CheckoutPage() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
   const handleCheckout = async (e: React.FormEvent) => {
     e.preventDefault();
     if (items.length === 0) return;
@@ -30,7 +32,7 @@ export default function CheckoutPage() {
 
     try {
       // 1. Crear Orden en backend
-      await fetch("http://localhost:3001/create-order", {
+      await fetch(`${apiBaseUrl}/create-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -42,7 +44,7 @@ export default function CheckoutPage() {
       });
 
       // 2. Crear Preferencia MP
-      const prefResponse = await fetch("http://localhost:3001/create-preference", {
+      const prefResponse = await fetch(`${apiBaseUrl}/create-preference`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ items, totals: { subtotal, shipping, total }, orderId })
