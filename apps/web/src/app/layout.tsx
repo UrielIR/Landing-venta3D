@@ -55,6 +55,19 @@ export default function RootLayout({
             `,
           }}
         />
+        {/* Forzar scroll al inicio al recargar */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                if ('scrollRestoration' in history) {
+                  history.scrollRestoration = 'manual';
+                }
+                window.scrollTo(0, 0);
+              })();
+            `,
+          }}
+        />
       </head>
       <body className="theme-transition">
         <CartProvider>

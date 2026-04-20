@@ -86,7 +86,7 @@ export function Header() {
         </Link>
 
         {/* Centro: Navegación (Desktop) */}
-        <nav className="hide-on-mobile" style={{ display: "flex", gap: "var(--space-8)" }}>
+        <nav className="hide-on-mobile" style={{ display: "flex", gap: "var(--space-4)" }}>
           {NAV_LINKS.map((link) => (
             <motion.a
               key={link.name}
@@ -94,16 +94,28 @@ export function Header() {
               whileHover={{ y: -2 }}
               style={{
                 position: "relative",
-                fontSize: "var(--text-base)",
+                fontSize: "calc(var(--text-sm) * 1.2)",
                 fontWeight: "var(--weight-bold)",
                 color: "var(--color-text-secondary)",
                 textDecoration: "none",
                 letterSpacing: "var(--tracking-wide)",
                 display: "inline-block",
+                padding: "var(--space-2) var(--space-4)",
+                borderRadius: "var(--radius-md)",
+                transition: "all 0.3s ease",
+                overflow: "hidden",
               }}
-              // Microinteracción premium al hover
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-primary)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-secondary)")}
+              // Efecto hover naranjo destacado
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "var(--color-text-inverse)";
+                e.currentTarget.style.backgroundColor = "var(--color-accent)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "var(--color-text-secondary)";
+                e.currentTarget.style.backgroundColor = "transparent";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
             >
               {link.name}
             </motion.a>
@@ -237,7 +249,7 @@ export function Header() {
               flexDirection: "column",
             }}
           >
-            <nav style={{ display: "flex", flexDirection: "column", gap: "var(--space-6)" }}>
+            <nav style={{ display: "flex", flexDirection: "column", gap: "var(--space-4)" }}>
               {NAV_LINKS.map((link, i) => (
                 <motion.a
                   key={link.name}
@@ -251,6 +263,19 @@ export function Header() {
                     fontFamily: "var(--font-display)",
                     color: "var(--color-text-primary)",
                     textDecoration: "none",
+                    padding: "var(--space-3) var(--space-4)",
+                    borderRadius: "var(--radius-lg)",
+                    transition: "all 0.3s ease",
+                    width: "fit-content",
+                  }}
+                  // Efecto hover naranjo destacado (mobile)
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "var(--color-text-inverse)";
+                    e.currentTarget.style.backgroundColor = "var(--color-accent)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "var(--color-text-primary)";
+                    e.currentTarget.style.backgroundColor = "transparent";
                   }}
                 >
                   {link.name}
